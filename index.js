@@ -12,14 +12,12 @@ function dot (a, b) {
 
 function base216 (octet) {
   octet = maybePad(octet)
-  var digits = octet.split('').map(Number)
-  var factor = [ 128, 64, 32, 16, 8, 4, 2, 1 ]
-  var dec = dot(digits, factor)
+  var dec = dot(octet.split('').map(Number), [ 128, 64, 32, 16, 8, 4, 2, 1 ])
   var hex = dec.toString(16)
   return hex.length === 2 ? hex : '0' + hex
 }
 
-function bits2octets (bits) {
+function bits2bytes (bits) {
   bits = maybePad(bits)
   var octets = Array(bits.length / 8)
 
@@ -30,6 +28,5 @@ function bits2octets (bits) {
   return octets.map(base216).join('')
 }
 
-module.exports = bits2octets
+module.exports = bits2bytes
 
-console.log(bits2octets(process.argv[2]))
