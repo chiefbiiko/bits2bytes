@@ -1,6 +1,6 @@
-function maybePad (octet) {
-  var rmd = octet.length % 8
-  return rmd ? '0'.repeat(8 - rmd) + octet : octet
+function maybePad (bits) {
+  var rmd = bits.length % 8
+  return rmd ? '0'.repeat(8 - rmd) + bits : bits
 }
 
 function dot (a, b) {
@@ -10,22 +10,22 @@ function dot (a, b) {
   return sum
 }
 
-function base216 (octet) {
-  octet = maybePad(octet)
-  var dec = dot(octet.split('').map(Number), [ 128, 64, 32, 16, 8, 4, 2, 1 ])
+function decimal2hexadecimal (bits) {
+  bits = maybePad(bits)
+  var dec = dot(bits.split('').map(Number), [ 128, 64, 32, 16, 8, 4, 2, 1 ])
   var hex = dec.toString(16)
   return hex.length === 2 ? hex : '0' + hex
 }
 
 function bits2bytes (bits) {
   bits = maybePad(bits)
-  var octets = Array(bits.length / 8)
+  var bytes = Array(bits.length / 8)
 
-  for (var i = 0, o = 0; i < octets.length; i++, o += 8) {
-    octets[i] = bits.slice(o, o + 8)
+  for (var i = 0, o = 0; i < bytes.length; i++, o += 8) {
+    bytes[i] = bits.slice(o, o + 8)
   }
 
-  return octets.map(base216).join('')
+  return bytes.map(decimal2hexadecimal).join('')
 }
 
 module.exports = bits2bytes
