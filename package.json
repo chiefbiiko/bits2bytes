@@ -1,0 +1,28 @@
+{
+  "name": "bits2bytes",
+  "version": "0.0.0",
+  "description": "converts bitstrings to octetstrings",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefbiiko/bits2bytes.git"
+  },
+  "keywords": [
+    "bitstring",
+    "octet",
+    "byte",
+    "hexadecimal"
+  ],
+  "author": "Noah Anabiik Schwarz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chiefbiiko/bits2bytes/issues"
+  },
+  "homepage": "https://github.com/chiefbiiko/bits2bytes#readme",
+  "devDependencies": {
+    "tape": "^4.8.0"
+  }
+}
