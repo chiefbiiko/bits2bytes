@@ -1,6 +1,6 @@
-function maybePad (bits) {
-  var rmd = bits.length % 8
-  return rmd ? '0'.repeat(8 - rmd) + bits : bits
+function maybePad (bits, len) {
+  var rmd = bits.length % (len || 8)
+  return rmd ? '0'.repeat((len || 8) - rmd) + bits : bits
 }
 
 function dot (a, b) {
@@ -10,11 +10,19 @@ function dot (a, b) {
   return sum
 }
 
-function decimal2hexadecimal (bits) {
+function binary2decimal (bits) {
   bits = maybePad(bits)
   var dec = dot(bits.split('').map(Number), [ 128, 64, 32, 16, 8, 4, 2, 1 ])
+  return dec
+}
+
+function decimal2hexadecimal (dec) {
   var hex = dec.toString(16)
   return hex.length === 2 ? hex : '0' + hex
+}
+
+function binary2hexadecimal (bits) {
+  return decimal2hexadecimal(binary2decimal(bits))
 }
 
 function bits2bytes (bits) {
@@ -25,7 +33,7 @@ function bits2bytes (bits) {
     bytes[i] = bits.slice(o, o + 8)
   }
 
-  return bytes.map(decimal2hexadecimal).join('')
+  return bytes.map(binary2hexadecimal).join('')
 }
 
 module.exports = bits2bytes
