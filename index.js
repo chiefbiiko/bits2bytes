@@ -1,3 +1,5 @@
+// TODO: allow choosing encoding of output byte
+
 function maybePad (bits, len) {
   var rmd = bits.length % (len || 8)
   return rmd ? '0'.repeat((len || 8) - rmd) + bits : bits
