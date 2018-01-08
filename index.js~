@@ -27,8 +27,7 @@ function binary2hexadecimal (bits) {
   return decimal2hexadecimal(binary2decimal(bits))
 }
 
-function bits2bytes (bits, opts) {
-  if (!opts) opts = {}
+function bits2bytes (bits) {
   bits = maybePad(bits)
   var bytes = Array(bits.length / 8)
 
@@ -36,7 +35,7 @@ function bits2bytes (bits, opts) {
     bytes[i] = bits.slice(o, o + 8)
   }
 
-  return bytes.map(opts.decimal ? binary2decimal : binary2hexadecimal)
+  return bytes.map(binary2hexadecimal).join('')
 }
 
 module.exports = bits2bytes
